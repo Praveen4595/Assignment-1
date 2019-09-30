@@ -1,0 +1,121 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment1
+{
+    enum Theater
+    {
+        Shubert = 200,Lyceum = 180,Ambassador = 270
+    }
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            Program p = new Program();
+            p.Go();
+            Console.ReadKey();
+        }
+        public void Go()
+        {
+            Console.WriteLine("Total Amount spent by Tom in Theaters at broadway");
+            var movie = Enum.GetValues(typeof(Theater));
+            String ticketrateString = string.Empty;
+            String ticketrateString1 = string.Empty;
+            String ticketrateString2 = string.Empty;
+            int ticketRate = 0;
+            int finalRate = 0;
+            foreach (var tMovies in movie)
+            {
+                int ticket = 0;
+                switch (tMovies)
+                {
+                    case Theater.Shubert:
+                        {
+                            do
+                            {
+                                Console.WriteLine("How many tickets buyed in Shubert:");
+                                ticketrateString = Console.ReadLine();
+                                if (int.TryParse(ticketrateString, out ticket) && (ticket >= 0 && ticket <= 110))
+                                {
+                                    break;
+                                }
+
+                                else
+                                {
+                                    Console.WriteLine("Please enter a vaild number of tickets between 0 and 110");
+                                }
+                            }
+                            while (true);
+                            ticketRate = ticket * ((int)tMovies);
+                            finalRate += ticketRate;
+                            break;
+                        }
+                    case Theater.Lyceum:
+                        {
+                            do
+                            {
+                                Console.Write("How many tickets buyed in Lyceum:");
+                                ticketrateString1 = Console.ReadLine();
+                                if (int.TryParse(ticketrateString1, out ticket) && (ticket >= 0 && ticket <= 110))
+                                {
+                                    break;
+                                }
+
+                                else
+                                {
+                                    Console.WriteLine("Please enter a valid number of tickets between 0 and 110");
+                                }
+
+                            }
+                            while (true);
+                            ticketRate = ticket * ((int)tMovies);
+                            finalRate += ticketRate;
+                            break;
+                        }
+
+                            case Theater.Ambassador:
+                        {
+                            do
+                            {
+                                Console.WriteLine("How many tickets buyed in Ambassador:");
+                                ticketrateString2 = Console.ReadLine();
+                                if (int.TryParse(ticketrateString2, out ticket) && (ticket >= 0 && ticket <= 110))
+                                {
+                                    break;
+
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Please enter a valid number of tickets between 0 and 110");
+                                }
+                            }
+                            while (true);
+                            ticketRate = ticket * ((int)tMovies);
+                            finalRate += ticketRate;
+                            break;
+                        }
+                            default:
+                            Console.WriteLine("Enter the correct value:");
+                            break;
+                }
+            }
+            int totalTickets = int.Parse(ticketrateString) + int.Parse(ticketrateString1) + int.Parse(ticketrateString2);
+            if (totalTickets == 0)
+            {
+                Console.WriteLine("You have not watched any movie yet");
+            }
+            else
+            {
+                decimal average = (decimal)finalRate / totalTickets;
+                Console.WriteLine("Tom spent total of {0} dollars and average price spent for movie {1} dollars", finalRate.ToString("c", new CultureInfo("en-US")),average.ToString("c",new CultureInfo("en-US")));
+
+            }                                               
+                               
+        }
+    }
+}
